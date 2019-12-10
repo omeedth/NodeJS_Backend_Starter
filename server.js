@@ -63,6 +63,11 @@ mongoose.connect(db.mongo.uri, { // Make sure the computers IP address is whitel
 app.use('/auth', AuthRoutes); // To access the auth routes you have to go to '/auth' first
 app.use('/profile', profileRoutes); // To access the profile routes you have to go to '/profile/ first
 
+Object.keys(Routes).forEach((key, index) => {
+    const route = Routes[key];
+    route(app); // Works because all routes only take app
+});
+
 /* OPTIONAL/DEBUGGING Routes */
 
 // Checks to see if the request object has a signed in user

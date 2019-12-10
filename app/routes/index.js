@@ -22,6 +22,7 @@ function updateNote(app) {
     noteRoutes.updateNote(app);
 }
 
+/* Exports */
 module.exports = {
     test: test,
     createNote, createNote,
