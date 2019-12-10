@@ -1,0 +1,24 @@
+{
+  "name": "travel-aid-be",
+  "version": "1.0.0",
+  "description": "The backend to the TravelAid application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Alex Thomas",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^2.2.36",
+    "mongoose": "^5.7.14",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}
