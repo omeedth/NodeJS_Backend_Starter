@@ -1,6 +1,5 @@
 /* External Import Statements */
 const express = require('express');
-const MongoClient = require('mongodb').MongoClient; // Used the mLab online MongoDB client (You can use only this)
 const mongoose = require('mongoose');               // Used the mLab online MongoDB client (Or this, NOT BOTH)
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -47,47 +46,17 @@ app.use(passport.session());
 app.use(cors(setup.cors.corsOptions)); // Production
 // app.use(cors()); // Development
 
-/* Database Setup */
-// NOTE: MongoDB once connected grants a database object that needs to be passed around in order to be used
-MongoClient.connect(db.mongo.uri,{
-
-}, (err, database) => {  // Make sure the computers IP address is whitelisted (IP addresses might change) 
-    if(err)
-        return console.log(err);
-    
-    console.log('Connected to MongoDB!');
-    // console.log(database); // DEBUG LINE
-
-    /* Option 1: Manually Add Routes */
-    // Routes.test(app, database)
-    // Routes.createNote(app, database)
-    // Routes.readNote(app, database)
-    // Routes.deleteNote(app, database)
-    // Routes.updateNote(app, database)
-
-    /* Option 2: Loop to Add Routes */
-    Object.keys(Routes).forEach(key => {
-        var route = Routes[key]
-        route(app, database) // Creates the "app.<request>(app,db)" route inside the "note_routes.js" file
-    });   
-    
-    /* Auth Routes */
-    console.log('Setting Up Auth Routes...')
-    passportSetup.setup(database);
-
-});
-
 /* Option 2 -> Mongoose */
 // NOTE: mongoose does NOT pass the database as an object to routes, but instead uses predefined schemas made in other files
-// mongoose.connect(db.mongo.uri, { // Make sure the computers IP address is whitelisted (IP addresses might change)
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true 
-// }, (err) => {
-//     if(err)
-//         return console.log(err);
+mongoose.connect(db.mongo.uri, { // Make sure the computers IP address is whitelisted (IP addresses might change)
+    useNewUrlParser: true,
+    useUnifiedTopology: true 
+}, (err) => {
+    if(err)
+        return console.log(err);
 
-//     console.log('Connected to MongoDB!');
-// })
+    console.log('Connected to MongoDB!');
+})
 
 /* Setup Additional Routes */
 
